@@ -1,9 +1,9 @@
-import sys
 import pandas as pd
+import sys
 
 def transform(infile):
     """
-    Transform the data from the input file and save it to a new CSV file.
+    Transform the data from the input file (from IvyWallet) and save it to a new CSV file (Cashew).
 
     Parameters:
         infile (str): The path to the input CSV file.
@@ -37,7 +37,7 @@ def transform(infile):
             'Account': row['Account']
         })
 
-        # If it's a Transfer, create a new record with the same columns
+        # If it's a Transfer, create a new record with the same columns, except account
         if row['Type'] == 'TRANSFER':
             transformed_data.append({
                 'Date': row['Date'],
@@ -53,7 +53,15 @@ def transform(infile):
     transformed_df.to_csv('./CashewPrelim.csv', index=False)
 
 def main():
-    """Main function"""
+    """
+    Main function
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     if len(sys.argv) < 2:
         print("Error: Add the input Ivy Wallet csv file as an argument.")
         sys.exit()
