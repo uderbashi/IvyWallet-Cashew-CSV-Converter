@@ -17,9 +17,9 @@ def transform(infile):
     # Iterate through each row in the expenses DataFrame
     for _, row in df_ivy.iterrows():
         # Transform the Amount based on Type
-        amount = float(row['Amount'].replace(',', ''))
+        amount = float(str(row['Amount']).replace(',', ''))
         if row['Type'] == 'TRANSFER':
-            amount = float(row['Transfer Amount'].replace(',', ''))
+            amount = float(str(row['Transfer Amount']).replace(',', ''))
             row['Category'] = "Balance Correction"
             if pd.isna(row['Description']):
                 row['Description'] = f"Transferred Balance: {row['Account']} -> {row['To Account']}"
