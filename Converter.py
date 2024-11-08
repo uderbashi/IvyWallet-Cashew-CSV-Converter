@@ -27,6 +27,12 @@ def transform(infile):
         if row['Type'] == 'EXPENSE' or row['Type'] == 'TRANSFER':
             amount = -1 * amount
 
+        # Ivy Wallet export future planned payment with empty date
+        # omits the entry if date is missing
+        if pd.isna(row['Date']):
+            print(f'IGNORED entry with no date: Title "{row["Title"]}" Amount "{amount}" Due at "{row["Due Date"]}"')
+            continue
+        
         # Append the original row to the transformed DataFrame
         transformed_data.append({
             'Date': row['Date'],
