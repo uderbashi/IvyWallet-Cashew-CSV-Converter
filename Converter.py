@@ -31,7 +31,7 @@ def transform(infile):
         # omits the entry if date is missing
         if pd.isna(row['Date']):
             future = row["Due Date"] if pd.isna(row['Date']) else "UNKNOWN"
-            print(f'Warning: an entry with no date is ignored: Title "{row["Title"]}" Amount "{amount}". Most likely to be a future paymnet due in {future}.')
+            print(f'Warning: an entry with no date is ignored: Title "{row["Title"]}" Amount "{amount}". Most likely to be a future payment due on {future}.')
             continue
         
         # Append the original row to the transformed DataFrame
